@@ -1,0 +1,60 @@
+
+<div class="admin-layout">
+  <div class=" nav-fixed-top cp-toolbar">
+      <button routerLink="product/add" type="button" class="btn btn-success btn-sm">
+          <i class="fa fa-plus" aria-hidden="true"></i> Add
+      </button>
+  </div>
+
+  <div class="cp-content">
+      <div class="container-fluid p-1">
+          <table class="table">
+              <caption>List of PRODUCT</caption>
+              <thead>
+                  <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">name</th>
+                      <th scope="col">status</th>
+                      <th scope="col">price</th>
+                      <th scope="col">description</th>
+                      <th scope="col">quanty</th>
+                      <th scope="col">program_promotion</th>
+                      <th>#</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let item of data; let i = index">
+                      <th scope="row">{{ i+1 }}</th>
+                      <td>{{ item.name }}</td>
+                      <td>{{ item.status }}</td>
+                      <td>{{ item.price }}</td>
+                      <td>{{ item.description }}</td>
+                      <td>{{ item.quanty }}</td>
+                     
+                      <td>
+                          <span *ngFor="let day of item.program_promotion; let i = index">
+                          <!-- <span *ngIf="day ===8"> CN</span>
+                          <span *ngIf="day  !== 8">     Thứ {{day}}</span> -->
+                          <span>{{day}},</span>
+                          </span>
+                      </td>
+                      
+                      <td>
+                          <span routerLink="product/detail/{{ item.uuid }}" class=" fts-100 badge badge-primary "><i class="fa fa-edit "></i></span>
+                          <span (click)="openModal(template)" class="ml-1 fts-100 badge badge-danger "><i class="fa fa-trash "></i></span>
+                          <!-- <button type="button" class="btn btn-primary" (click)="openModal(template)">Open modal</button> -->
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+
+          <ng-template #template>
+            <div class="modal-body text-center">
+                <p>Do you want to delete?</p>
+                <button type="button" class="btn btn-default" (click)="confirm(uuid)" >Yes</button>
+                <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+            </div>
+        </ng-template>
+
+      </div>
+  </div>

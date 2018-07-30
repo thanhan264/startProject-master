@@ -16,7 +16,7 @@ export class PromotionListComponent implements OnInit {
         this.data = this.promotionService.getLists();
     }
     deleteItem(uuid: string ) {
-        this.data =    this.promotionService.remove(uuid);
+        this.data =  this.promotionService.remove(uuid);
         
     }
 }

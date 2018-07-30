@@ -8,7 +8,7 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
-        CommonModule,
+        CommonModule,       
         DemoRoutingModule
     ],
     declarations: [DemoComponent]
