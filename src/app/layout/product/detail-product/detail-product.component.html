@@ -1,3 +1,154 @@
-<p>
-  detail-product works!
-</p>
+
+<div class="admin-layout">
+  <div class=" nav-fixed-top cp-toolbar">
+      <!-- <button (click)="back()" class="btn btn-primary btn-sm" type="button">
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Trở lại
+      </button>
+      <button (click)="resetForm()" type="button" class="btn btn-primary btn-sm ml-1">
+          <i class="fa fa-plus" aria-hidden="true"></i> Thêm
+      </button> -->
+
+      <button  type="submit" value="Submit Form" class="btn btn-primary button expanded" [disabled]="!rForm.valid">
+          <i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu
+      </button>
+  </div>
+
+  <div class="cp-content">
+  
+    <div class="container-fluid p-0">
+        <!-- <form #productForm="ngForm" #myForm> -->
+        <div *ngIf="!name; else forminfo">
+        <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+
+            <div class="row m-0 p-0 mt-3">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label font-weight-bold">Mã: </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control form-control-sm" formControlName="uuid">
+                            <div class="alert text-danger mt-2 text-df" *ngIf="!rForm.controls['uuid'].valid && rForm.controls['uuid'].touched">
+                                    <i class="fa fa-exclamation-triangle"></i>{{ titleAlert }}</div>
+
+                            <!-- <div *ngIf="uuid.dirty ||uuid.touched" class="text-danger mt-2 text-df">
+                                <div *ngIf="uuid.hasError('required')" class="text-danger mt-2 text-df">
+                                    <i class="fa fa-exclamation-triangle"></i> uuid không để rỗng
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label font-weight-bold "> Name:</label>
+                        <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm"  formControlName="name">
+                                <div class="alert text-danger mt-2 text-df" *ngIf="!rForm.controls['name'].valid && rForm.controls['name'].touched">
+                                        <i class="fa fa-exclamation-triangle"></i>Tên phải từ 5 đến 100 ký tự</div>
+                                <!-- <div *ngIf="name.dirty ||name.touched" class="text-danger mt-2 text-df">
+                                    <div *ngIf="name.hasError('required')" class="text-danger mt-2 text-df">
+                                        <i class="fa fa-exclamation-triangle"></i> Tên không được để trống
+                                    </div>
+                                </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="row m-0 p-0 mt-3">
+                <div class="col-sm-6">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label font-weight-bold "> Status:</label>
+                            <div class="col-sm-8">
+                                    <select id="select">
+                                            <option>ON</option>
+                                            <option>OFF</option>
+            
+                                          </select>
+                                    <!-- <input type="text" class="form-control form-control-sm"  formControlName="status"> -->
+                                    <!-- <div *ngIf="status.dirty ||status.touched" class="text-danger mt-2 text-df">
+                                        <div *ngIf="status.hasError('required')" class="text-danger mt-2 text-df">
+                                            <i class="fa fa-exclamation-triangle"></i> Status không được để trống
+                                        </div>
+                                    </div> -->
+                            </div>
+                        </div>
+                </div>
+
+                <div class="col-sm-6">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label font-weight-bold"> Giá: </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm"  formControlName="price">
+                                <div class="alert text-danger mt-2 text-df" *ngIf="!rForm.controls['price'].valid && rForm.controls['price'].touched">
+                                        <i class="fa fa-exclamation-triangle"></i>Phải nhập giá!</div>
+                                <!-- <div *ngIf="price.dirty ||price.touched" class="text-danger mt-2 text-df">
+                                    <div *ngIf="uuid.hasError('required')" class="text-danger mt-2 text-df">
+                                        <i class="fa fa-exclamation-triangle"></i> Phải nhập giá
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="row ml-0 mr-0 mt-3 p-0">
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label  font-weight-bold">Mô tả:
+                                    </label>
+                            <div class="col-sm-10">
+                                <textarea rows="2" class="form-control form-control-sm" formControlName="desciption"></textarea>
+                                <!-- <div class="alert text-danger mt-2 text-df" *ngIf="!rForm.controls['desciption'].valid && rForm.controls['desciption'].touched">
+                                        <i class="fa fa-exclamation-triangle"></i>Mô tả từ 10 đến 100 ký tự</div> -->
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="row m-0 p-0 mt-3">
+                    <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label font-weight-bold "> Quanty:</label>
+                                <div class="col-sm-8">
+                                        <input type="text" class="form-control form-control-sm"  formControlName="quanty">
+                                        <div class="alert text-danger mt-2 text-df" *ngIf="!rForm.controls['quanty'].valid && rForm.controls['quanty'].touched">
+                                                <i class="fa fa-exclamation-triangle"></i>Không được để trống!</div>
+                                        <!-- <div *ngIf="quanty.dirty ||quanty.touched" class="text-danger mt-2 text-df">
+                                            <div *ngIf="quanty.hasError('required')" class="text-danger mt-2 text-df">
+                                                <i class="fa fa-exclamation-triangle"></i> Quanty không được để trống
+                                            </div>
+                                        </div> -->
+                                </div>
+                            </div>
+                    </div>
+    
+                    <div class="col-sm-6">
+                       
+                    </div>
+            </div>
+
+            <div class="row ml-0 mr-0 mt-3 p-0">
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label  font-weight-bold">Chương trình khuyến mãi:
+                                    </label>
+                                <div class="col-sm-2"><input type="checkbox" name=""> Tặng quà 1</div>
+                                <div class="col-sm-2"><input type="checkbox" name=""> Tặng quà 2</div>
+                                <div class="col-sm-2"><input type="checkbox" name=""> Tặng quà 3</div>
+                                <div class="col-sm-2"><input type="checkbox" name=""> Tặng quà 4</div>
+                                <div class="col-sm-2"><input type="checkbox" name=""> Tặng quà 5</div>
+                        </div>
+                    </div>
+            </div>
+                
+               
+            
+        
+
+        </form>
+    </div>
+
+</div>
+
